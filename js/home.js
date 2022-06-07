@@ -13,14 +13,30 @@ class Home {
      }
 
      async launch() {
-          const data = await this.data.getPlats();
-          this.search.innerHTML = new Search().searchTemplate()
+          this.data = await this.data.getPlats();
+          this.search.innerHTML = new Search(this.data).searchTemplate()
           this.filters.innerHTML = new Filter().template();
+
+          this.displayPlats();
+     }
+
+     displayPlats() {
+          const search = document.querySelector('.input-box');
+
+          search.addEventListener('keyup', (e) => {
+               const searchValue = e.target.value;
+               const result = this.data.filter(el => el.name.toLowerCase().includes(searchValue.toLowerCase()));
+               this.sectionPlat.innerHTML = '';
+               result.forEach(el => {
+                    this.sectionPlat.appendChild(new Plats(el).renderPlat());
+               })
+          })
           
-          data.forEach(el => {
+          this.data.forEach(el => {
                const p = new Plats(el);
                this.sectionPlat.appendChild(p.renderPlat());
           })
+
      }
 }
 
