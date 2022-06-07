@@ -17,10 +17,10 @@ class Home {
           this.search.innerHTML = new Search().searchTemplate()
           this.filters.innerHTML = new Filter().template();
           
-          for (let el of data) {
+          data.forEach(el => {
                const p = new Plats(el);
                this.sectionPlat.appendChild(p.renderPlat());
-          }
+          })
      }
 }
 
