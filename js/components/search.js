@@ -11,7 +11,10 @@ export class Search {
           return ` 
           <div class="input-box">
                <input type="text" class="form-control searchBar" placeholder='Rechercher une recette'>
-               <i class="fa fa-search"></i>                    
+               <i class="fa fa-search"></i>   
+               <ul class="suggestions">
+               
+               </ul>
           </div>
           `;
      }
