@@ -10,6 +10,7 @@ class Home {
           this.search = document.getElementById('search');
           this.sectionPlat = document.querySelector('.plats');
           this.filters = document.querySelector('.filters');
+          this.suggestions = document.querySelector('.suggestions');
      }
 
      async launch() {
@@ -23,21 +24,30 @@ class Home {
      displayPlats() {
           const search = document.querySelector('.input-box');
 
-          search.addEventListener('keyup', (e) => {
+          search.addEventListener('input', (e) => {
                const searchValue = e.target.value;
-               const result = this.data.filter(el => el.name.toLowerCase().includes(searchValue.toLowerCase()));
-               this.sectionPlat.innerHTML = '';
-               result.forEach(el => {
-                    this.sectionPlat.appendChild(new Plats(el).renderPlat());
-               })
+               if (searchValue.length > 2) {
+                    const result = this.data.filter(el => el.name.toLowerCase().includes(searchValue.toLowerCase()));
+                    this.sectionPlat.innerHTML = '';
+                    result.forEach(el => {
+                         this.sectionPlat.appendChild(new Plats(el).renderPlat());
+                    })
+                    
+               } //sinon on affiche tout
+               else {
+                    this.displayPlats();
+               }
+               
           })
-          
+
           this.data.forEach(el => {
                const p = new Plats(el);
                this.sectionPlat.appendChild(p.renderPlat());
           })
 
      }
+
+
 }
 
 const home = new Home();
