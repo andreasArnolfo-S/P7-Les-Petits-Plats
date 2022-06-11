@@ -23,7 +23,7 @@ export default class Plats {
                               </ul>
                          </div>
                          <div class="desc">
-                              <p>${this.data.description}</p>
+                              <p class='text-start'>${this.data.description}</p>
                          </div>
                     </div>
                </div> `
