@@ -16,7 +16,8 @@ class Home {
      async launch() {
           this.data = await this.data.getPlats();
           this.search.innerHTML = new Search(this.data).searchTemplate()
-          this.filters.innerHTML = new Filter().template();
+          this.filters.innerHTML = new Filter(this.data).template();
+          new Filter(this.data).onClick();
 
           this.displayPlats();
      }
@@ -39,6 +40,7 @@ class Home {
                }
                
           })
+
 
           this.data.forEach(el => {
                const p = new Plats(el);
