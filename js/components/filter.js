@@ -60,7 +60,7 @@ export class Filter {
                this.appareils.push(el.appliance.toLowerCase())
           })
           const filteredArray = this.appareils.filter((ele, pos) => this.appareils.indexOf(ele) == pos);
-          return filteredArray.slice(0, 30).map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
+          return filteredArray.map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
      }
 
      ustensiles() {
@@ -69,7 +69,7 @@ export class Filter {
                el.ustensils.map(ing => this.ustensiles.push(ing.toLowerCase()));
           })
           const filteredArray = this.ustensiles.filter((ele, pos) => this.ustensiles.indexOf(ele) == pos);
-          return filteredArray.slice(0, 30).map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
+          return filteredArray.map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
 
      }
 
