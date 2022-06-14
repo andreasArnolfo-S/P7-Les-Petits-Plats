@@ -1,16 +1,26 @@
+import Plats from './../factory/plats';
+
 export class Search {
-     constructor() {
+     constructor(data) {
           this.url = '../../data/recipes.js';
+          this.data = data
      }
 
      // template barre de recherche bootstrap
      searchTemplate() {
           return ` 
           <div class="input-box">
-               <input type="text" class="form-control" placeholder='Rechercher une recette'>
-               <i class="fa fa-search"></i>                    
+               <input type="text" class="form-control searchBar" placeholder='Rechercher une recette'>
+               <i class="fa fa-search"></i>   
+               <ul class="suggestions">
+               
+               </ul>
           </div>
           `;
      }
+
+     // method to display the search results
+
+
 
 }

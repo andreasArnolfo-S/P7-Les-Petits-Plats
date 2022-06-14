@@ -17,13 +17,13 @@ export default class Plats {
 
                     <div class="d-flex justify-content-between ztext">
                          <div class="ing_list">
-                              <ul>
+                              <ul class='myList'>
                                 ${this.data.ingredients.map(el => 
                                    `<li>${el.ingredient + ': ' + (el.quantity !== undefined ? el.quantity : '') + (el.unit !== undefined ? el.unit : '')}</li>`).join('')}
                               </ul>
                          </div>
                          <div class="desc">
-                              <p>${this.data.description}</p>
+                              <p class='text-start'>${this.data.description}</p>
                          </div>
                     </div>
                </div> `
