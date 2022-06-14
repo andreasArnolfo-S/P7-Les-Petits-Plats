@@ -10,13 +10,14 @@ export class Filter {
      template() {
           return `
 
+          
+
           <div class="dropdown inputFilter">
                <input class="btn btn-primary dropdown-toggle infil" list='ingList' href="#" placeholder='ingredients' role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
                
                </input>
 
                <div class="dropdown-menu bg-primary" aria-labelledby="dropdownMenuLink" id="ingList" >
-                    <input class="dropdown-item w-100 bg-white"></input>    
                     ${this.ingredients()} 
                </div>
           </div>
@@ -44,32 +45,59 @@ export class Filter {
      }
 
      ingredients() {
+
           this.ingredients = []
           this.data.forEach(el => {
-               el.ingredients.map(ing => this.ingredients.push(ing.ingredient.toLowerCase()));               
+               el.ingredients.map(ing => this.ingredients.push(ing.ingredient.toLowerCase()));
           })
-          const filteredArray = this.ingredients.filter( (ele, pos)=> this.ingredients.indexOf(ele) == pos);
-          console.log(filteredArray)
-          return filteredArray.slice(0,30).map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
+          const filteredArray = this.ingredients.filter((ele, pos) => this.ingredients.indexOf(ele) == pos);
+          return filteredArray.slice(0, 30).map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
      }
 
      appareils() {
           this.appareils = []
           this.data.forEach(el => {
-               this.appareils.push(el.appliance.toLowerCase())               
+               this.appareils.push(el.appliance.toLowerCase())
           })
-          const filteredArray = this.appareils.filter( (ele, pos)=> this.appareils.indexOf(ele) == pos);
-          return filteredArray.slice(0,30).map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
+          const filteredArray = this.appareils.filter((ele, pos) => this.appareils.indexOf(ele) == pos);
+          return filteredArray.slice(0, 30).map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
      }
 
      ustensiles() {
           this.ustensiles = []
           this.data.forEach(el => {
-               el.ustensils.map(ing => this.ustensiles.push(ing.toLowerCase()));               
+               el.ustensils.map(ing => this.ustensiles.push(ing.toLowerCase()));
           })
-          const filteredArray = this.ustensiles.filter( (ele, pos)=> this.ustensiles.indexOf(ele) == pos);
-          return filteredArray.slice(0,30).map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
+          const filteredArray = this.ustensiles.filter((ele, pos) => this.ustensiles.indexOf(ele) == pos);
+          return filteredArray.slice(0, 30).map(el => `<option value='${el}' class="dropdown-item" href="#">${el}</option>`)
 
      }
+
+     onClick() {
+          const op = document.querySelectorAll('.dropdown-item');
+
+          op.forEach(el => {
+               el.addEventListener('click', () => {
+                    console.log(el.value)
+                    const resulting = this.data.filter(e => e.ingredients.filter(ing => ing.ingredient.toLowerCase().includes(el.value.toLowerCase())));
+                    console.log(resulting)
+                    const btn = CreateElement('button', {
+                         class: 'btnfil',
+                         innerHtml: el.innerHTML
+                    })
+                    btn.setAttribute('class', 'btn btn-primary')
+                    btn.addEventListener('click', () => {
+                         btn.remove()
+                    })
+                    document.querySelector('.filter-box').appendChild(btn)
+                    return btn
+               })
+          })
+
+     }
+
+
+     
+
 
 }
