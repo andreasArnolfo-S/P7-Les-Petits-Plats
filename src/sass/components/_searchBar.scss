@@ -1,0 +1,14 @@
+.input-box {
+	position: relative;
+	width: 90%;
+	input {
+		background-color: #e7e7e7;
+          height: 50px;
+	}
+	i {
+		position: absolute;
+		right: 13px;
+		top: 16px;
+		color: black;
+	}
+}
