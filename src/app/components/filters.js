@@ -114,6 +114,21 @@ export class filters {
         }
     }
 
+    searchItemWithInput(categoryName) {
+        const searchInput = document.getElementById('searchInto-' + categoryName);
+        searchInput.addEventListener('keyup', () => {
+            const value = searchInput.value.toLowerCase();
+            const items = document.querySelectorAll(`#menu-${categoryName} .dropdown-item`);
+            items.forEach(el => {
+                if (el.textContent.toLowerCase().indexOf(value) != -1) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            })
+        })
+    }
+
     clickOnItem(categoryName, color) {
         const items = document.querySelectorAll(`#${categoryName}-list li`);
         items.forEach(el => {
