@@ -1,0 +1,58 @@
+.section-plats {
+	margin-top: 40px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	width: 100%;
+	justify-content: center;
+	.card {
+		width: 32%;
+		height: 450px;
+		overflow: hidden;
+		text-overflow: ellipsis !important;
+
+		img {
+			object-fit: cover;
+			height: 225px;
+		}
+		.card-body {
+			height: 225px;
+			background: #E7E7E7;
+		}
+		.ztext {
+			margin-top: 15px;
+			height: 225px;
+			.ing_list {
+				ul {
+					list-style-type: none;
+					padding: 0;
+					font-weight: 700;
+					font-size: 14px;
+					line-height: 14px;
+					li {
+						margin-bottom: 10px;
+					}
+				}
+			}
+			.desc {
+				font-weight: 400;
+				font-size: 14px;
+				line-height: 100%;
+				width: 50%;
+				height: 150px;
+				line-clamp: 5;
+
+				p {
+					display: -webkit-box;
+					max-width: 400px;
+					height: 109.2px;
+					-webkit-line-clamp: 5;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					line-height: 1.625;
+				}
+			}
+		}
+	}
+}

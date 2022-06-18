@@ -1,0 +1,124 @@
+@use "sass:map";
+
+/* ======================================== */
+/* MIXINS */
+/* ======================================== */
+/* ======================================== */
+/* BREAKPOINTS*/
+/* ======================================== */
+$breakpoints: (
+	xs-mobile: 375px,
+	mobile: 600px,
+	tablet: 768px,
+	laptop: 992px,
+	desktop: 1200px,
+);
+
+/* == up to 375  */
+@mixin max-375px {
+	@media screen and (max-width: map-get($breakpoints, xs-mobile )) {
+		@content;
+
+	}
+}
+/* == from 375  */
+@mixin min-375px {
+	@media screen and (min-width: map-get($breakpoints, xs-mobile )) {
+		@content;
+	}
+}
+/* == up to 600  */
+@mixin max-600px {
+	@media screen and (max-width: map-get($breakpoints, mobile )) {
+		@content;
+	}
+}
+/* == from 600  */
+@mixin min-600px {
+	@media screen and (min-width: map-get($breakpoints, mobile )) {
+		@content;
+	}
+}
+/* == up to 768  */
+@mixin max-768px {
+	@media screen and (max-width: map-get($breakpoints, tablet )) {
+		@content;
+	}
+}
+/* == from 768  */
+@mixin min-768px {
+	@media screen and (min-width: map-get($breakpoints, tablet )) {
+		@content;
+	}
+}
+/* == up to 992  */
+@mixin max-992px {
+	@media screen and (max-width: map-get($breakpoints, laptop )) {
+		@content;
+	}
+}
+/* == from 992  */
+@mixin min-992px {
+	@media screen and (min-width: map-get($breakpoints, laptop )) {
+		@content;
+	}
+}
+
+/* == up to 1200  */
+@mixin max-1200px {
+	@media screen and (max-width: map-get($breakpoints, desktop )) {
+		@content;
+	}
+}
+
+/* == from 1200  */
+@mixin min-1200px {
+	@media screen and (min-width: map-get($breakpoints, desktop )) {
+		@content;
+	}
+}
+
+/* ======================================== */
+/* COMMON ELEMENTS */
+/* ======================================== */
+@mixin icon-base {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@mixin icon-size($size: 1.3em) {
+	font-size: $size;
+}
+
+/* ======================================== */
+/* POSITION */
+/* ======================================== */
+@mixin centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* ======================================== */
+/* FLEXBOX */
+/* ======================================== */
+@mixin flex($dir, $wraptype) {
+	display: flex;
+	flex-flow: $dir $wraptype;
+}
+
+/* ======================================== */
+/* MARGIN / PADDING */
+/* ======================================== */
+@mixin m0-p0 {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* ======================================== */
+/* BORDER-RADIUS */
+/* ======================================== */
+
+@mixin border-radius($pixel...) {
+	border-radius: $pixel;
+}
