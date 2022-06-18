@@ -20,6 +20,7 @@ class Main {
                if (cat === 'ustensils') { this.color = 'danger'; }
                this.sectionFilters.appendChild(new filters(data).filtersTemplate(cat, this.color));
                new filters(data).openFilters(cat);
+               new filters(data).searchItemWithInput(cat)
                new filters(data).clickOnItem(cat, this.color);
           })
 
