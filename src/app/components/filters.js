@@ -1,8 +1,11 @@
 import { CreateElement } from './../utils/createElement';
-
+import { Search } from './search';
+import Plats from './plats';
 export class filters {
     constructor(data) {
         this.sectionFilters = document.querySelector('.section-filters');
+        this.sectionPlat = document.querySelector('.section-plats');
+
         this.data = data
     }
 
@@ -142,6 +145,7 @@ export class filters {
                 this.filterSearch(value)
                 btn.setAttribute('class', ` btn btn-${color} fing`)
                 btn.addEventListener('click', () => {
+                    new Search(this.data).searchPlats(this.data, '')
                     btn.remove()
                 })
                 document.querySelector('.filter-box').appendChild(btn)
@@ -155,7 +159,13 @@ export class filters {
     filterSearch(value) {
         const filtered = this.data.filter(el => {
             if (el.ingredients.some(ing => ing.ingredient.toLowerCase() === value)) {
-                return el
+                this.sectionPlat.innerHTML = '';
+                const fil = new Search(this.data).searchPlats(this.data, el.name);
+                console.log(fil)
+                for (let e of fil) {
+                    const plats = new Plats(e);
+                    this.sectionPlat.appendChild(plats.renderPlat());
+                }
             } else if (el.appliance.toLowerCase() === value) {
                 return el
             } else if (el.ustensils.some(ing => ing.toLowerCase() === value)) {

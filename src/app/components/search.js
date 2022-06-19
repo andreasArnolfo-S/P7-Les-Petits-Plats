@@ -13,21 +13,39 @@ export class Search {
           search.addEventListener('input', (e) => {
                const searchValue = e.target.value;
                if (searchValue.length > 2) {
-                    const result = this.data.filter(el => el.name.toLowerCase().includes(searchValue.toLowerCase()));
-                    this.sectionPlat.innerHTML = '';
-                    result.forEach(el => {
-                         this.sectionPlat.appendChild(new Plats(el).renderPlat());
-                    })
                     
-               } //sinon on affiche tout
-               else {
-                    this.displayPlats();
+                    const sortedPlats = this.searchPlats(this.data, searchValue);
+                    console.log(sortedPlats);
+
+                    this.sectionPlat.innerHTML = '';
+                    sortedPlats.forEach(plat => {
+                         const plats = new Plats(plat);
+                         this.sectionPlat.appendChild(plats.renderPlat());
+                    })
+               } else {
+                    this.displayPlats()
                }
-               
           })
-          
-          this.data.forEach(el => {
+
+          for (let el of this.data) {
                this.sectionPlat.appendChild(new Plats(el).renderPlat());
-          })
+          }
+
      }
+
+     // search plats by name with boucle while
+     searchPlats(data, searchValue) {
+          let i = 0;
+          let tab = [];
+          while (i < data.length) {
+               if (data[i].name.toLowerCase().includes(searchValue.toLowerCase())) {
+                    tab.push(data[i]);
+               }
+               i++;
+          }
+
+          return tab
+     }
+     
+
 }
