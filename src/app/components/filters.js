@@ -134,56 +134,52 @@ export class filters {
 
     clickOnItem(categoryName, color) {
         const items = document.querySelectorAll(`#${categoryName}-list li`);
+        
         items.forEach(el => {
             el.addEventListener('click', () => {
                 const value = el.getAttribute('value');
                 const btn = CreateElement('button', {
-                    class: 'btnfil',
                     innerHtml: value
                 })
-
-                this.filterSearch(value)
                 btn.setAttribute('class', ` btn btn-${color} fing`)
                 btn.addEventListener('click', () => {
-                    new Search(this.data).searchPlats(this.data, '')
                     btn.remove()
                 })
                 document.querySelector('.filter-box').appendChild(btn)
-                    
-                return btn
+
+                return this.filterSearch(value)
             })
         })
     }
 
     // filtrer les recettes selon les elements selectionnés
-    filterSearch(value) {
-        const filtered = this.data.filter(el => {
-            if (el.ingredients.some(ing => ing.ingredient.toLowerCase() === value)) {
-                this.sectionPlat.innerHTML = '';
-                const fil = new Search(this.data).searchPlats(this.data, el.name);
-                console.log(fil)
-                for (let e of fil) {
-                    const plats = new Plats(e);
-                    this.sectionPlat.appendChild(plats.renderPlat());
-                }
-            } else if (el.appliance.toLowerCase() === value) {
-                return el
-            } else if (el.ustensils.some(ing => ing.toLowerCase() === value)) {
-                return el
-            }
+    filterSearch(value, data) {
+        if (data === undefined || data === null) {
+            data = this.data
+        } else {
+            data = this.arr
+        }
+        this.arr = []
+        data.filter(el => {
+            if (el.ingredients.some(ing => ing.ingredient.toLowerCase() === value) || el.appliance.toLowerCase() === value || el.ustensils.some(ust => ust.toLowerCase() === value)) {
+                this.arr.push(el)
+            } 
         })
-        this.displayRecipes(filtered)
+        console.log(this.arr)
+        this.displayRecipes(this.arr)
     }
 
-    displayRecipes(filtered) {
+    displayRecipes(array) {
 
-        filtered.forEach(el => {
+        this.sectionPlat.innerHTML = '';
 
-            this.filterSearch(el)
-            
-            console.log(el)
-
-        })
-
+        for (let e of array) {
+            this.sectionPlat.appendChild(new Plats(e).renderPlat());
+        }
+        return this.data = array
     }
+
+
+
+
 }
