@@ -1,7 +1,9 @@
 import './sass/style.scss';
 import { Data } from './app/modules/fetchData';
-import { Search } from './app/components/search';
-import { filters } from './app/components/filters';
+import { SearchComponents } from './app/components/searchComponents';
+import { SearchController } from './app/controller/searchController';
+import { FiltersComponents } from './app/components/filtersComponents';
+import { FiltersController } from './app/controller/filtersController';
 
 class Main {
      constructor() {
@@ -11,19 +13,11 @@ class Main {
 
      async init() {
           const data = await this.data.getPlats();
-          new Search(data).displayPlats();
+          new SearchComponents(data).setList();
+          new SearchController(data).searchPlats();
 
-          const categories = ['ingredients', 'appliance', 'ustensils'];
-          categories.forEach(cat => {
-               if (cat === 'ingredients') { this.color = 'primary'; }
-               if (cat === 'appliance') { this.color = 'success'; }
-               if (cat === 'ustensils') { this.color = 'danger'; }
-               this.sectionFilters.appendChild(new filters(data).filtersTemplate(cat, this.color));
-               new filters(data).openFilters(cat);
-               new filters(data).searchItemWithInput(cat)
-               new filters(data).clickOnItem(cat, this.color);
-          })
-
+          
+          new FiltersComponents(data).filters()
      }
 }
 
