@@ -93,7 +93,8 @@ export class FiltersComponents {
           if (data === undefined || data === null || data.length <= 0) {
                data = this.data
           }
-          data.forEach(el => {
+
+          for (let el of data) {
                if (el.ingredients.some(ing => ing.ingredient.toLowerCase() === value) ||
                     el.appliance.toLowerCase() === value ||
                     el.ustensils.some(ust => ust.toLowerCase() === value)) {
@@ -101,9 +102,7 @@ export class FiltersComponents {
                     this.tabdeux.push(el)
 
                }
-
-
-          })
+          }
           return new SearchComponents(this.tabdeux).setList()
      }
 

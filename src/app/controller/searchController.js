@@ -26,7 +26,9 @@ export class SearchController {
           let i = 0;
           let tab = [];
           while (i < this.data.length) {
-               if (this.data[i].name.toLowerCase().includes(value.toLowerCase())) {
+               if (this.data[i].name.toLowerCase().includes(value.toLowerCase()) ||
+                this.data[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(value.toLowerCase())) ||
+                this.data[i].description.toLowerCase().includes(value.toLowerCase())) {
                     tab.push(this.data[i]);
                } 
                i++;
