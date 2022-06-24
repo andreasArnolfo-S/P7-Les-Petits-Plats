@@ -1,5 +1,4 @@
 import { CreateElement } from './../utils/createElement';
-import { Search } from './search';
 import Plats from './plats';
 export class filters {
     constructor(data) {
@@ -77,19 +76,6 @@ export class filters {
             this.sectionFilters.querySelector(`#menu-header-open-${categoryName}`).setAttribute('isActive', 'false');
         })
 
-        this.list.addEventListener('click', (e) => {
-            if (e.target !== this.list) {
-                this.isclose.style.display = 'block';
-                this.isopen.style.display = 'none';
-                this.list.style.display = 'none';
-
-                this.sectionFilters.setAttribute('isActive', 'false');
-                this.sectionFilters.querySelector(`#menu-${categoryName}`).setAttribute('isOpen', 'false');
-                this.sectionFilters.querySelector(`#menu-header-close-${categoryName}`).setAttribute('isActive', 'true');
-                this.sectionFilters.querySelector(`#menu-header-open-${categoryName}`).setAttribute('isActive', 'false');
-            }
-        })
-
     }
 
     displayItems(categoryName) {
@@ -147,7 +133,7 @@ export class filters {
                 })
                 document.querySelector('.filter-box').appendChild(btn)
 
-                return this.filterSearch(value)
+                return this.filterSearch(value, this.arr)
             })
         })
     }
@@ -178,8 +164,6 @@ export class filters {
         }
         return this.data = array
     }
-
-
 
 
 }

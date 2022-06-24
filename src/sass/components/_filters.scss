@@ -7,160 +7,52 @@
 	// background-color: pink;
 	margin: 1% 0 0 0;
 	padding: 0 !important;
-	gap: 5%;
+	gap: 2%;
 	margin-left: 40px;
 	width: 100%;
-	collapsing-menu-component {
-		margin: 0 !important;
-		padding: 0 !important;
-		z-index: 5; // search menus pos when toggled open
-		color: white;
+	.dropdown {
+		transition: 0.6s;
+	}
+	input::placeholder {
+		color:#fff;
 	}
 
-	collapsing-menu-component[isActive="true"] {
-		@include c.max-992px {
-			z-index: 10;
-		}
-	}
-
-	[id^="collapsing-"][isActive="false"] * {
-		// ^= indicates "starts with". Conversely, $= indicates "ends with".
-		@include c.min-992px {
-			border-radius: 5px;
-		}
-	}
-
-	.category-menu {
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
-	}
-	.menu-header.open,
-	.menu-header.open > input {
-		border-top-left-radius: 5px;
-	}
-	.menu-header.open,
-	.menu-header.open > i {
-		border-top-right-radius: 5px;
-	}
-
-	.menu-header.closed,
-	.menu-header.open {
-		@include c.max-992px {
-			width: 100% !important;
-			margin: 0 !important;
-			padding: 0 !important;
-		}
-	}
-
-	#collapsing-ingredients * {
-		background-color: #174ab8;
-	}
-	#collapsing-appareils * {
-		background-color: #4bb9fe;
-	}
-	#collapsing-ustensils * {
-		background-color: #e83e8c;
-	}
-	[id^="collapsing-"] li {
-		list-style: none;
-	}
-
-	.card.card-body {
-		width: 100%;
-        height: auto;
-		background-color: transparent;
-	}
-
-	.tagsWrapper {
-		// background-color: yellow;
-		width: 100%;
-		@include c.flex(row, wrap);
-		@include c.max-768px {
-			justify-content: flex-start;
-		}
-		.searchTag {
-			@include c.border-radius(5px);
-			font-size: 0.8em;
-			@include c.min-992px {
-				font-size: 1.2em;
+	input:focus {
+		width: 635px;
+		transition: 0.3s;
+		border: none;
+		animation: 0.3s bounce forwards;
+		@keyframes bounce {
+			0% {
+				transform: scale(1)
 			}
-			background-color: blue !important;
+			50% {
+				transform: scale(1.02)
+			}
+			100% {
+				transform: scale(1)
+			}
+		}
+		&::placeholder {
+			color:gray;
+		}
+	}
+
+	.list {
+		width: 639px;
+		columns: 3;
+		column-count: 3;
+		top: -3px !important;
+		::after {
+			opacity: 1;
+		}
+		li {
 			color: #fff;
-			padding: 1%;
-			margin: 1%;
-			@include c.centered;
-			i.fa.fa-times-circle-o {
-				padding-left: 5px;
-			}
-			@include c.max-600px {
-				font-size: 0.7em;
-			}
-		}
-	}
+			cursor: pointer;
+			font-size: 18px;
 
-	.menu-header {
-		// = visible buttons / input field / carets
-		display: flex;
-		flex-direction: row;
-		height: 55px;
-		opacity: 1 !important;
-		width: 90%; // of col
-		.close {
-			float: none !important;
-		}
-
-		button.btn {
-			height: 50px;
-			text-align: unset;
-			color: #fff !important;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			transition: 0.6s;
-			@include c.min-992px {
-				font-size: 1.2em !important;
-				width: 200px;
-			}
-		}
-		i.fas.fa-angle-down,
-		i.fas.fa-angle-up {
-			width: 20%;
-			@include c.centered;
-		}
-		.searchInput {
-			height: 100%;
-			padding-left: 5%;
-			color: black;
-		}
-	}
-	.category-menu {
-		margin-top: 10px;
-		height: 100%;
-		background-color: transparent;
-		z-index: 2;
-		@include c.max-992px {
-			width: 100%;
-		}
-		@include c.min-992px {
-		}
-		height: 50vh;
-		position: absolute;
-		overflow: scroll;
-		.list {
-
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-            column-count: 3;
-			li {
-				list-style: none !important;
-				color: #fff;
-				font-size: 1.2em;
-				cursor: pointer;
-			}
-			li:hover a,
-			li:active a {
-				background-color: grey !important;
-
+			&:hover {
+				background-color: #292727;
 			}
 		}
 	}

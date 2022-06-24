@@ -4,6 +4,20 @@
 	input {
 		background-color: #e7e7e7;
           height: 50px;
+		&:focus {
+			animation: 0.3s bounce forwards;
+		}
+		@keyframes bounce {
+			0% {
+				transform: scale(1)
+			}
+			50% {
+				transform: scale(1.02)
+			}
+			100% {
+				transform: scale(1)
+			}
+		}
 	}
 	i {
 		position: absolute;
