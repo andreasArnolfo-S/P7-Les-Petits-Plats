@@ -1,4 +1,3 @@
-
 import { SearchComponents } from './../components/searchComponents';
 
 export class SearchController {
@@ -12,13 +11,14 @@ export class SearchController {
           this.search.addEventListener('input', (e) => {
                const searchValue = e.target.value;
                if (searchValue && searchValue.trim().length > 2) {
-                    const sortedPlats = this.searchAlgo(searchValue);
-                    return new SearchComponents(sortedPlats).setList()
+                    this.sortedPlats = this.searchAlgo(searchValue);
+                    new SearchComponents(this.sortedPlats).setList()
+                    
                } else {
                     return this.searchPlats()
                }
           })
-
+          
           new SearchComponents(this.data).setList()
      }
 
@@ -36,9 +36,5 @@ export class SearchController {
 
           return tab
      }
-
-
-
-
 
 }
