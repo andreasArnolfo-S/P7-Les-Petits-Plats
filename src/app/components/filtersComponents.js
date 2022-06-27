@@ -1,6 +1,5 @@
 import { FiltersController } from '../controller/filtersController';
 import { CreateElement } from './../utils/createElement';
-import { SearchComponents } from './searchComponents';
 
 export class FiltersComponents extends FiltersController {
 
@@ -63,7 +62,8 @@ export class FiltersComponents extends FiltersController {
                btn.setAttribute('class', ` btn btn-${color} fing`)
                btn.addEventListener('click', () => {
                     btn.remove()
-                    this.test(value, this.tabdeux)
+                    this.test(value)
+               
                })
                document.querySelector('.filter-box').appendChild(btn)
                this.test(value, this.tabdeux)

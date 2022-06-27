@@ -26,6 +26,7 @@ export class FiltersController {
           return new SearchComponents(this.tabdeux).setList()
      }
 
+
      displayItems(categoryName) {
           if (categoryName === 'ingredients') {
                this.ingredients = []
