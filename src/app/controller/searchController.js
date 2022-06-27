@@ -10,6 +10,7 @@ export class SearchController {
      searchPlats () {
           this.search.addEventListener('input', (e) => {
                const searchValue = e.target.value;
+               //commence lorsque l’utilisateur entre au moins 3 caractères dans la barre de recherche principale.
                if (searchValue && searchValue.trim().length > 2) {
                     this.sortedPlats = this.searchAlgo(searchValue);
                     new SearchComponents(this.sortedPlats).setList()
@@ -36,5 +37,5 @@ export class SearchController {
 
           return tab
      }
-
+     
 }
