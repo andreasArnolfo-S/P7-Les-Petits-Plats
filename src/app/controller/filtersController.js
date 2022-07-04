@@ -6,24 +6,24 @@ export class FiltersController {
           this.data = data
      }
 
-     test(value, data) {
-
-          this.tabdeux = []
-
-          if (data === undefined || data === null || data.length <= 0) {
-               data = this.data
-          }
-
-          for (let el of data) {
-               if (el.ingredients.some(ing => ing.ingredient.toLowerCase() === value) ||
-                    el.appliance.toLowerCase() === value ||
-                    el.ustensils.some(ust => ust.toLowerCase() === value)) {
-
-                    this.tabdeux.push(el)
-
+     test(value) {
+          
+          console.log(value)
+          this.arr2 = [...this.data] //all recipes
+          console.log(this.arr2)
+          for (let v of value) {
+               for (let i = 0; i < this.arr2.length; i++) {
+                    if (this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v)) || this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v)) || this.arr2[i].appliance.toLowerCase().includes(v)) {
+                         console.log(this.arr2[i])
+                    }
+                    else {
+                         this.arr2.splice(i);
+                    }
                }
           }
-          return new SearchComponents(this.tabdeux).setList()
+          console.log(this.arr2)
+
+          return new SearchComponents(this.arr2).setList()
      }
 
 

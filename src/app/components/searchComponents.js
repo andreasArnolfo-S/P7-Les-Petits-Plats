@@ -6,7 +6,6 @@ export class SearchComponents {
 
           this.data = data
           this.sectionPlat = document.querySelector('.section-plats');
-          console.log(this.data)
      }
 
      setList() {

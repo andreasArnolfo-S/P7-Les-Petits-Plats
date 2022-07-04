@@ -13,6 +13,8 @@ class Main {
 
      async init() {
           const data = await this.data.getPlats();
+
+
           new SearchComponents(data).setList();
           new SearchController(data).searchPlats();
 

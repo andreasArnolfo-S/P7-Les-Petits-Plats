@@ -34,15 +34,17 @@ export class FiltersComponents extends FiltersController {
 
      filtersTemplate(categoryName, color) {
           this.tbn = CreateElement('div', {
-               class: 'dropdown',
                innerHtml: `
-               <input placeholder="rechercher un ${categoryName} &#xf078" class="btn btn-${color} btn-lg dropdown-toggle" id="dropdownMenuButton${categoryName}" data-toggle="dropdown" aria-expanded="false">
+               <input placeholder="${categoryName}" class="bg-${color}" id="dropdownMenuButton${categoryName}" data-toggle="dropdown" aria-expanded="false">
                </input>
+               <label><i class="fa-solid fa-angle-down"></i></label>
                <div class="dropdown-menu bg-${color} list" id="list-${categoryName}" aria-labelledby="dropdownMenuButton${categoryName}">
                     ${this.displayItems(categoryName)}
                </div>
              `
           })
+
+          this.tbn.setAttribute('class', `dropdown btn btn-${color} btn-lg `)
 
           const bts = document.querySelector('.adv-search-wrapper');
           bts.classList.add('row', 'col-12', 'col-lg-12');
@@ -54,21 +56,30 @@ export class FiltersComponents extends FiltersController {
 
      clickOnItem(categoryName, color) {
           const list = document.querySelector(`#list-${categoryName}`);
+
+          this.arr = []
+
           list.addEventListener('click', (e) => {
                const value = e.target.innerHTML;
                const btn = CreateElement('button', {
-                    innerHtml: value
+                    innerHtml: value + ' ' + '<i class="fa-solid fa-times"></i>',
                })
+
+               this.arr.push(value)
                btn.setAttribute('class', ` btn btn-${color} fing`)
                btn.addEventListener('click', () => {
-                    btn.remove()
-                    this.test(value)
-               
+                    btn.style.animation = 'fadeOut .6s forwards'
+                    setTimeout(() => {
+                      btn.remove()   
+                    }, 800)
+                    this.arr.splice(this.arr.indexOf(value), 1)
+                    this.test(this.arr)
+
                })
                document.querySelector('.filter-box').appendChild(btn)
-               this.test(value, this.tabdeux)
+               this.test(this.arr)
+               
           })
-
      }
 
 
