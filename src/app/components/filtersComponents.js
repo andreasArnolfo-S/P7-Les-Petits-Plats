@@ -64,31 +64,27 @@ export class FiltersComponents extends FiltersController {
                
                this.cantDoubleSameTags(value)
 
-               this.btn = CreateElement('button', {
+               const btn = CreateElement('button', {
                     innerHtml: value + ' ' + '<i class="fa-solid fa-times"></i>',
                })
 
                this.arr.push(value)
-               this.btn.setAttribute('class', ` btn btn-${color} fing`)
-               this.closeTags(value)
-               document.querySelector('.filter-box').appendChild(this.btn)
-               console.log(this.arr)
+               btn.setAttribute('class', ` btn btn-${color} fing`)
+               btn.addEventListener('click', () => {
+                    btn.style.animation = 'fadeOut .6s forwards'
+                    setTimeout(() => {
+                         btn.remove()
+                    }, 800)
+                    this.arr.splice(this.arr.indexOf(value), 1)
+                    this.test(this.arr)
+
+               })
+               document.querySelector('.filter-box').appendChild(btn)
                this.test(this.arr)
 
           })
      }
 
-     closeTags (value) {
-          this.btn.addEventListener('click', () => {
-               this.btn.style.animation = 'fadeOut .6s forwards'
-               setTimeout(() => {
-                    this.btn.remove()
-               }, 800)
-               this.arr.splice(this.arr.indexOf(value), 1)
-               this.test(this.arr)
-
-          })
-     }
 
      cantDoubleSameTags (value) {
           const box = document.querySelector('.filter-box')
@@ -96,6 +92,7 @@ export class FiltersComponents extends FiltersController {
           box.childNodes.forEach(el => {
                if(el.innerHTML.includes(value)) {
                     this.arr.splice(this.arr.indexOf(value), 1)
+
                     el.remove()
                }
           })

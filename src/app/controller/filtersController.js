@@ -8,19 +8,38 @@ export class FiltersController {
 
      test(value) {
 
-          console.log(this.data)
-          console.log(value)
           this.arr2 = [...this.data] //all recipes
           if (value.length > 0) {
                for (let v of value) {
                     for (let i = 0; i < this.arr2.length; i++) {
-                         this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v)) ||
-                              this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v)) ||
-                              this.arr2[i].appliance.toLowerCase().includes(v)
-                              ? console.log(this.arr2[i]) : this.arr2.splice(i);
-
+                         if (this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v))) {
+                              console.log(this.arr2[i].name)
+                         } else if (this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
+                              console.log(this.arr2[i].name)
+                         } else if (this.arr2[i].appliance.toLowerCase().includes(v)) {
+                              console.log(this.arr2[i].name)
+                         } else {
+                              this.arr2.splice(i, 1)
+                         }
+                         // this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v)) || this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v)) || this.arr2[i].appliance.toLowerCase().includes(v) ? console.log(this.arr2[i]) : this.arr2.splice(i);
                     }
                }
+               // let i = 0
+               // for (let v of value) {
+               //      while (i < this.arr2.length) {
+               //           if (this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v))) {
+               //                console.log(this.arr2[i].name)
+               //           } else if (this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
+               //                console.log(this.arr2[i].name)
+               //           } else if (this.arr2[i].appliance.toLowerCase().includes(v)) {
+               //                console.log(this.arr2[i].name)
+               //           } else {
+               //                this.arr2 = this.arr2.splice(i)
+               //           }
+               //           i++
+               //      }
+               // }
+
           } else {
                this.arr2 = this.data
           }
