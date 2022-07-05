@@ -7,23 +7,29 @@ export class FiltersController {
      }
 
      test(value) {
-          
+
+          console.log(this.data)
           console.log(value)
           this.arr2 = [...this.data] //all recipes
-          console.log(this.arr2)
-          for (let v of value) {
-               for (let i = 0; i < this.arr2.length; i++) {
-                    if (this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v)) || this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v)) || this.arr2[i].appliance.toLowerCase().includes(v)) {
-                         console.log(this.arr2[i])
-                    }
-                    else {
-                         this.arr2.splice(i);
+          if (value.length > 0) {
+               for (let v of value) {
+                    for (let i = 0; i < this.arr2.length; i++) {
+                         this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v)) ||
+                              this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v)) ||
+                              this.arr2[i].appliance.toLowerCase().includes(v)
+                              ? console.log(this.arr2[i]) : this.arr2.splice(i);
+
                     }
                }
+          } else {
+               this.arr2 = this.data
           }
+
           console.log(this.arr2)
 
-          return new SearchComponents(this.arr2).setList()
+
+          return new SearchComponents(this.arr2).setList(value)
+
      }
 
 

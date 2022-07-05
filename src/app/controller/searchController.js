@@ -12,7 +12,7 @@ export class SearchController {
                const searchValue = e.target.value;
                this.sortedPlats = this.searchAlgo(searchValue);
                //commence lorsque l’utilisateur entre au moins 3 caractères dans la barre de recherche principale.
-               return (searchValue.length > 2) ? new SearchComponents(this.sortedPlats).setList() : this.searchPlats();
+               return (searchValue.length > 2) ? new SearchComponents(this.sortedPlats).setList(searchValue) : this.searchPlats();
 
           })
 

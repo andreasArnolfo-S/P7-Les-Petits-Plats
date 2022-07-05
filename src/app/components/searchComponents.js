@@ -8,7 +8,7 @@ export class SearchComponents {
           this.sectionPlat = document.querySelector('.section-plats');
      }
 
-     setList() {
+     setList(value) {
 
           this.clearList();
           
@@ -17,7 +17,9 @@ export class SearchComponents {
           }
 
           if(this.data.length === 0) {
-               this.setNoResults();
+               this.setNoResults(value);
+          } else {
+               document.querySelector('.zeroResult').innerHTML = ''
           }
 
      }
@@ -26,14 +28,14 @@ export class SearchComponents {
           this.sectionPlat.innerHTML = ''
      }
 
-     setNoResults() {
+     setNoResults(value) {
 
           return document.querySelector('.zeroResult').innerHTML = ` 
           <div class="jumbotron w-75">
                <h1 class="display-4">:(</h1>
                <p class="lead">Aucun résultat ! </p>
                <hr class="my-4">
-               <p>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson »...</p>
+               <p>Aucune recette ne correspond à votre critère '${value}' vous pouvez chercher « tarte aux pommes », « poisson »...</p>
                <a class="btn btn-primary btn-lg" href="/src" role="button">Retour</a>
           </div>`
 

@@ -61,26 +61,43 @@ export class FiltersComponents extends FiltersController {
 
           list.addEventListener('click', (e) => {
                const value = e.target.innerHTML;
-               const btn = CreateElement('button', {
+               
+               this.cantDoubleSameTags(value)
+
+               this.btn = CreateElement('button', {
                     innerHtml: value + ' ' + '<i class="fa-solid fa-times"></i>',
                })
 
                this.arr.push(value)
-               btn.setAttribute('class', ` btn btn-${color} fing`)
-               btn.addEventListener('click', () => {
-                    btn.style.animation = 'fadeOut .6s forwards'
-                    setTimeout(() => {
-                      btn.remove()   
-                    }, 800)
-                    this.arr.splice(this.arr.indexOf(value), 1)
-                    this.test(this.arr)
-
-               })
-               document.querySelector('.filter-box').appendChild(btn)
+               this.btn.setAttribute('class', ` btn btn-${color} fing`)
+               this.closeTags(value)
+               document.querySelector('.filter-box').appendChild(this.btn)
+               console.log(this.arr)
                this.test(this.arr)
-               
+
           })
      }
 
+     closeTags (value) {
+          this.btn.addEventListener('click', () => {
+               this.btn.style.animation = 'fadeOut .6s forwards'
+               setTimeout(() => {
+                    this.btn.remove()
+               }, 800)
+               this.arr.splice(this.arr.indexOf(value), 1)
+               this.test(this.arr)
 
+          })
+     }
+
+     cantDoubleSameTags (value) {
+          const box = document.querySelector('.filter-box')
+
+          box.childNodes.forEach(el => {
+               if(el.innerHTML.includes(value)) {
+                    this.arr.splice(this.arr.indexOf(value), 1)
+                    el.remove()
+               }
+          })
+     }
 }
