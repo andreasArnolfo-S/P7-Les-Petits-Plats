@@ -8,34 +8,22 @@ export class FiltersController {
 
      test(value) {
 
-          this.result = [] //all recipes
+          this.result = [] 
           this.toMove = []
           if (value.length > 0) {
                for (let v of value) {
                     for (let i = 0; i < this.data.length; i++) {
-
-                         console.log(i)
-                         if (this.data[i].ingredients.some((ing) => {
-                              console.log(ing.ingredient.toLowerCase(), v)
-                              return ing.ingredient.toLowerCase().includes(v)
-                         })) {
-                              console.log(this.data[i])
+                         if (this.data[i].ingredients.some(el => el.ingredient.toLowerCase().includes(v))) {
+                              this.result.push(this.data[i])
                          } else if (this.data[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
-                              console.log(this.data[i])
+                              this.result.push(this.data[i])
                          } else if (this.data[i].appliance.toLowerCase().includes(v)) {
-                              console.log(this.data[i])
+                              this.result.push(this.data[i])
                          } else {
                               this.toMove.push(this.data[i])
                          }
                     }
                }
-
-               this.data.forEach((e) => {
-                    if (!this.toMove.includes(e)) {
-                         this.result.push(e)
-                    }
-               })
-
 
           } else {
                this.result = [...this.data]
