@@ -2,7 +2,7 @@ import Plats from './plats';
 
 export class SearchComponents {
 
-     constructor (data) {
+     constructor(data) {
 
           this.data = data
           this.sectionPlat = document.querySelector('.section-plats');
@@ -11,12 +11,12 @@ export class SearchComponents {
      setList(value) {
 
           this.clearList();
-          
+
           for (let el of this.data) {
                this.sectionPlat.appendChild(new Plats(el).renderPlat());
           }
 
-          if(this.data.length === 0) {
+          if (this.data.length === 0) {
                this.setNoResults(value);
           } else {
                document.querySelector('.zeroResult').innerHTML = ''
