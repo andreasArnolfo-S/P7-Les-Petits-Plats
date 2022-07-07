@@ -8,46 +8,42 @@ export class FiltersController {
 
      test(value) {
 
-          this.arr2 = [...this.data] //all recipes
+          this.result = [] //all recipes
+          this.toMove = []
           if (value.length > 0) {
                for (let v of value) {
-                    for (let i = 0; i < this.arr2.length; i++) {
-                         if (this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v))) {
-                              console.log(this.arr2[i].name)
-                         } else if (this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
-                              console.log(this.arr2[i].name)
-                         } else if (this.arr2[i].appliance.toLowerCase().includes(v)) {
-                              console.log(this.arr2[i].name)
+                    for (let i = 0; i < this.data.length; i++) {
+
+                         console.log(i)
+                         if (this.data[i].ingredients.some((ing) => {
+                              console.log(ing.ingredient.toLowerCase(), v)
+                              return ing.ingredient.toLowerCase().includes(v)
+                         })) {
+                              console.log(this.data[i])
+                         } else if (this.data[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
+                              console.log(this.data[i])
+                         } else if (this.data[i].appliance.toLowerCase().includes(v)) {
+                              console.log(this.data[i])
                          } else {
-                              this.arr2.splice(i, 1)
+                              this.toMove.push(this.data[i])
                          }
-                         // this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v)) || this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v)) || this.arr2[i].appliance.toLowerCase().includes(v) ? console.log(this.arr2[i]) : this.arr2.splice(i);
                     }
                }
-               // let i = 0
-               // for (let v of value) {
-               //      while (i < this.arr2.length) {
-               //           if (this.arr2[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(v))) {
-               //                console.log(this.arr2[i].name)
-               //           } else if (this.arr2[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
-               //                console.log(this.arr2[i].name)
-               //           } else if (this.arr2[i].appliance.toLowerCase().includes(v)) {
-               //                console.log(this.arr2[i].name)
-               //           } else {
-               //                this.arr2 = this.arr2.splice(i)
-               //           }
-               //           i++
-               //      }
-               // }
+
+               this.data.forEach((e) => {
+                    if (!this.toMove.includes(e)) {
+                         this.result.push(e)
+                    }
+               })
+
 
           } else {
-               this.arr2 = this.data
+               this.result = [...this.data]
           }
+          console.log(this.result)
 
-          console.log(this.arr2)
 
-
-          return new SearchComponents(this.arr2).setList(value)
+          return new SearchComponents(this.result).setList(value)
 
      }
 
