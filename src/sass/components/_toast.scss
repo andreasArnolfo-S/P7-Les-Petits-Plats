@@ -1,22 +1,25 @@
 .toast {
      opacity: 1;
      position: absolute;
-     top: 40px;
-     right: 40px;
+     bottom: 40px;
+     left: 40px;
      animation: .6s toast-in forwards;
+     z-index: 5;
+     width: 400px !important;
      .mr-auto {
           color: #fff;
      }
      .toast-body {
 
           color: #fff;
+          font-size: 1.1rem;
      }
 }
 
 @keyframes toast-in {
      0% {
           opacity: 0;
-          transform: translateX(60px);
+          transform: translateX(-60px);
      }
      100% {
           opacity: 1;
