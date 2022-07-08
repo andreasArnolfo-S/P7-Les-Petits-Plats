@@ -8,37 +8,32 @@ export class FiltersController {
      }
 
      test(value) {
-
-          this.result = [] 
           this.toMove = []
+          this.result = [] 
           if (value.length > 0) {
-               for (let v of value) {
-                    for (let i = 0; i < this.data.length; i++) {
-                         if (this.data[i].ingredients.some(el => el.ingredient.toLowerCase().includes(v))) {
-                              console.log(this.data[i])
-                         } else if (this.data[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
-                              console.log(this.data[i])
-                         } else if (this.data[i].appliance.toLowerCase().includes(v)) {
-                              console.log(this.data[i])
+               value.forEach(el => {
+                    this.data.forEach(plat => {
+                         if (plat.name.toLowerCase().includes(el) ||
+                              plat.ingredients.some(ing => ing.ingredient.toLowerCase().includes(el)) ||
+                              plat.description.toLowerCase().includes(el)) {
+                              console.log(plat)
                          } else {
-                              this.toMove.push(this.data[i])
+                              this.toMove.push(plat)
                          }
+                    })
+               })
+               this.data.forEach(plat => {
+                    if (this.toMove.indexOf(plat) == -1) {
+                         this.result.push(plat)
                     }
-               }
-
-               for (let e of this.data) {
-                    if(!this.toMove.includes(e)){
-                         this.result.push(e)
-                    }
-               }
+               })
           } else {
                this.result = [...this.data]
           }
-          console.log(this.result)
 
           if (this.result.length > 0) {
                new Toast(this.result.length).show()
-               
+
           } else {
                new Toast(this.result.length).showZero()
           }

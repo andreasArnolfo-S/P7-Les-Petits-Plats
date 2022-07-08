@@ -12,9 +12,9 @@ export class SearchComponents {
 
           this.clearList();
 
-          for (let el of this.data) {
+          this.data.forEach(el => {
                this.sectionPlat.appendChild(new Plats(el).renderPlat());
-          }
+          })
 
           if (this.data.length === 0) {
                this.setNoResults(value);

@@ -20,18 +20,13 @@ export class SearchController {
      }
 
      searchAlgo(value) {
-          let i = 0;
-          let tab = [];
-          while (i < this.data.length) {
-               if (this.data[i].name.toLowerCase().includes(value.toLowerCase()) ||
-                    this.data[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(value.toLowerCase())) ||
-                    this.data[i].description.toLowerCase().includes(value.toLowerCase())) {
-                    tab.push(this.data[i]);
+          return this.data.filter(el => {
+               if (el.name.toLowerCase().includes(value) ||
+                    el.ingredients.some(ing => ing.ingredient.toLowerCase().includes(value)) ||
+                    el.description.toLowerCase().includes(value)) {
+                    return el
                }
-               i++;
-          }
-
-          return tab
+          })
      }
      
 
