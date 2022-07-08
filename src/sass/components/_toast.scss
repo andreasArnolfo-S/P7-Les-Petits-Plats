@@ -1,0 +1,25 @@
+.toast {
+     opacity: 1;
+     position: absolute;
+     top: 40px;
+     right: 40px;
+     animation: .6s toast-in forwards;
+     .mr-auto {
+          color: #fff;
+     }
+     .toast-body {
+
+          color: #fff;
+     }
+}
+
+@keyframes toast-in {
+     0% {
+          opacity: 0;
+          transform: translateX(60px);
+     }
+     100% {
+          opacity: 1;
+          transform: translateX(0);
+     }
+}

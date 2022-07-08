@@ -1,4 +1,5 @@
 import { SearchComponents } from './../components/searchComponents';
+import { Toast } from './../components/toast';
 
 export class FiltersController {
 
@@ -14,21 +15,33 @@ export class FiltersController {
                for (let v of value) {
                     for (let i = 0; i < this.data.length; i++) {
                          if (this.data[i].ingredients.some(el => el.ingredient.toLowerCase().includes(v))) {
-                              this.result.push(this.data[i])
+                              console.log(this.data[i])
                          } else if (this.data[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
-                              this.result.push(this.data[i])
+                              console.log(this.data[i])
                          } else if (this.data[i].appliance.toLowerCase().includes(v)) {
-                              this.result.push(this.data[i])
+                              console.log(this.data[i])
                          } else {
                               this.toMove.push(this.data[i])
                          }
                     }
                }
 
+               for (let e of this.data) {
+                    if(!this.toMove.includes(e)){
+                         this.result.push(e)
+                    }
+               }
           } else {
                this.result = [...this.data]
           }
           console.log(this.result)
+
+          if (this.result.length > 0) {
+               new Toast(this.result.length).show()
+
+          } else {
+               new Toast(this.result.length).showZero()
+          }
 
 
           return new SearchComponents(this.result).setList(value)
