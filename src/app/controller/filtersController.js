@@ -1,4 +1,5 @@
 import { SearchComponents } from './../components/searchComponents';
+import { Toast } from './../components/toast';
 
 export class FiltersController {
 
@@ -34,6 +35,13 @@ export class FiltersController {
                this.result = [...this.data]
           }
           console.log(this.result)
+
+          if (this.result.length > 0) {
+               new Toast(this.result.length).show()
+
+          } else {
+               new Toast(this.result.length).showZero()
+          }
 
 
           return new SearchComponents(this.result).setList(value)
