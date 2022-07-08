@@ -38,7 +38,7 @@ export class FiltersController {
 
           if (this.result.length > 0) {
                new Toast(this.result.length).show()
-
+               
           } else {
                new Toast(this.result.length).showZero()
           }
