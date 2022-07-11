@@ -10,9 +10,11 @@ export class SearchController {
      searchPlats() {
           this.search.addEventListener('input', (e) => {
                const searchValue = e.target.value;
-               this.sortedPlats = this.searchAlgo(searchValue);
-               //commence lorsque l’utilisateur entre au moins 3 caractères dans la barre de recherche principale.
-               return (searchValue.length > 2) ? new SearchComponents(this.sortedPlats).setList(searchValue) : this.searchPlats();
+               if (searchValue.length > 2) {
+                    this.searchAlgo(searchValue);
+               } else {
+                    this.searchPlats()
+               }
 
           })
 
@@ -20,18 +22,17 @@ export class SearchController {
      }
 
      searchAlgo(value) {
+          this.cards = document.querySelectorAll('.card');
           let i = 0;
-          let tab = [];
-          while (i < this.data.length) {
-               if (this.data[i].name.toLowerCase().includes(value.toLowerCase()) ||
-                    this.data[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(value.toLowerCase())) ||
-                    this.data[i].description.toLowerCase().includes(value.toLowerCase())) {
-                    tab.push(this.data[i]);
+          while (i < this.cards.length) {
+               if (this.cards[i].textContent.toLowerCase().includes(value.toLowerCase())) {
+                    this.cards[i].style.display = 'block';
+               } else {
+                    this.cards[i].style.display = 'none';
                }
                i++;
           }
 
-          return tab
      }
      
 
