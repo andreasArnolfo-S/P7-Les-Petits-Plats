@@ -7,47 +7,68 @@ export class FiltersController {
           this.data = data
      }
 
-     test(value) {
+     // test(value) {
 
-          this.result = [] 
-          this.toMove = []
-          if (value.length > 0) {
-               for (let v of value) {
-                    for (let i = 0; i < this.data.length; i++) {
-                         if (this.data[i].ingredients.some(el => el.ingredient.toLowerCase().includes(v))) {
-                              console.log(this.data[i])
-                         } else if (this.data[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
-                              console.log(this.data[i])
-                         } else if (this.data[i].appliance.toLowerCase().includes(v)) {
-                              console.log(this.data[i])
-                         } else {
-                              this.toMove.push(this.data[i])
-                         }
-                    }
-               }
+     //      this.result = [] 
+     //      this.toMove = []
+     //      if (value.length > 0) {
+     //           for (let v of value) {
+     //                for (let i = 0; i < this.data.length; i++) {
+     //                     if (this.data[i].ingredients.some(el => el.ingredient.toLowerCase().includes(v))) {
+     //                          console.log(this.data[i])
+     //                     } else if (this.data[i].ustensils.some(ust => ust.toLowerCase().includes(v))) {
+     //                          console.log(this.data[i])
+     //                     } else if (this.data[i].appliance.toLowerCase().includes(v)) {
+     //                          console.log(this.data[i])
+     //                     } else {
+     //                          this.toMove.push(this.data[i])
+     //                     }
+     //                }
+     //           }
 
-               for (let e of this.data) {
-                    if(!this.toMove.includes(e)){
-                         this.result.push(e)
-                    }
-               }
-          } else {
-               this.result = [...this.data]
-          }
-          console.log(this.result)
+     //           for (let e of this.data) {
+     //                if(!this.toMove.includes(e)){
+     //                     this.result.push(e)
+     //                }
+     //           }
+     //      } else {
+     //           this.result = [...this.data]
+     //      }
+     //      console.log(this.result)
 
-          if (this.result.length > 0) {
-               new Toast(this.result.length).show()
+     //      if (this.result.length > 0) {
+     //           new Toast(this.result.length).show()
                
-          } else {
-               new Toast(this.result.length).showZero()
+     //      } else {
+     //           new Toast(this.result.length).showZero()
+     //      }
+
+
+     //      return new SearchComponents(this.result).setList(value)
+
+     // }
+
+     test(value, array) {
+
+
+          if (value.length === 0) {
+               return array
           }
+          const result = [] 
+          for (let i = 0; i < array.length; i++) {
+               if (array[i].ingredients.some(el => el.ingredient.toLowerCase().includes(value[0]))) {
+                    result.push(array[i])
+               } else if (array[i].ustensils.some(ust => ust.toLowerCase().includes(value[0]))) {
+                    result.push(array[i])
+               } else if (array[i].appliance.toLowerCase().includes(value[0])) {
+                    result.push(array[i])
+               }
+          }
+          value.splice(0, 1)
+          this.test(value, result)
 
-
-          return new SearchComponents(this.result).setList(value)
 
      }
-
 
      displayItems(categoryName) {
           if (categoryName === 'ingredients') {
