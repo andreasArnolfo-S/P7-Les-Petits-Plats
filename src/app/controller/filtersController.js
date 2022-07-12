@@ -5,6 +5,12 @@ export class FiltersController {
 
      constructor(data) {
           this.data = data
+
+          this.data.forEach(el => {
+               this.formatData = el.ingredients.concat(el.ustensils, el.appliance)
+          })
+
+          console.log(this.formatData.includes('Four'))
      }
 
      test(value) {

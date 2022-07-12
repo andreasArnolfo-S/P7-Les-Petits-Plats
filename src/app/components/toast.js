@@ -1,5 +1,5 @@
 export class Toast {
-     constructor(message, duration = 3000) {
+     constructor(message, duration = 2000) {
           this.message = message;
           this.duration = duration;
      }
