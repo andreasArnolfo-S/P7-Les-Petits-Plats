@@ -5,8 +5,12 @@ export default class Plats {
           this.data = data;
      }
 
+     /**
+      * Il crée un nouvel élément HTML, définit sa classe et innerHTML, et renvoie l'élément.
+      * @returns Un élément de carte avec les données de l'objet.
+      */
      renderPlat() {
-          const card = CreateElement('div', { 
+          const card = CreateElement('article', { 
                class: 'card',
                innerHtml: `<img class="card-img-top" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80" alt="Card image cap">
                <div class="card-body">

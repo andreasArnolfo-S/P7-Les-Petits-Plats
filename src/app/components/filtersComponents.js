@@ -1,5 +1,6 @@
 import { FiltersController } from '../controller/filtersController';
 import { CreateElement } from './../utils/createElement';
+import { SearchComponents } from './searchComponents';
 
 export class FiltersComponents extends FiltersController {
 
@@ -23,6 +24,10 @@ export class FiltersComponents extends FiltersController {
           ];
      }
 
+     /**
+      * Pour chaque catégorie, ajoutez un filtre à la section Filtres, recherchez des éléments avec le nom
+      * de la catégorie et cliquez sur l'élément.
+      */
      filters() {
           this.categories.forEach(e => {
                this.sectionFilters.append(this.filtersTemplate(e.name, e.color))
@@ -32,6 +37,11 @@ export class FiltersComponents extends FiltersController {
 
      }
 
+     /**
+      * @param categoryName - le nom de la catégorie
+      * @param color - est la couleur du bouton
+      * @returns la valeur de la variable this.tbn.
+      */
      filtersTemplate(categoryName, color) {
           this.tbn = CreateElement('div', {
                innerHtml: `
@@ -54,10 +64,16 @@ export class FiltersComponents extends FiltersController {
 
 
 
+     /**
+      * C'est une fonction qui crée un bouton avec une valeur à partir d'une liste, puis filtre la liste par
+      * la valeur du bouton.
+      * @param categoryName - le nom de la catégorie sur laquelle on clique
+      * @param color - est la couleur du bouton
+      */
      clickOnItem(categoryName, color) {
           const list = document.querySelector(`#list-${categoryName}`);
 
-          this.arr = []
+          this.tagsValue = []
 
           list.addEventListener('click', (e) => {
                const value = e.target.innerHTML;
@@ -68,30 +84,34 @@ export class FiltersComponents extends FiltersController {
                     innerHtml: value + ' ' + '<i class="fa-solid fa-times"></i>',
                })
 
-               this.arr.push(value)
+               this.tagsValue.push(value)
                btn.setAttribute('class', ` btn btn-${color} fing`)
                btn.addEventListener('click', () => {
                     btn.style.animation = 'fadeOut .6s forwards'
                     setTimeout(() => {
                          btn.remove()
                     }, 800)
-                    this.arr.splice(this.arr.indexOf(value), 1)
-                    this.test(this.arr)
-
+                    this.tagsValue.splice(this.tagsValue.indexOf(value), 1)
+                    this.tagsValue.length === 0 ? new SearchComponents(this.data).setList(value) : this.filteringByTags([...this.tagsValue], [...this.data]);
                })
                document.querySelector('.filter-box').appendChild(btn)
-               this.test(this.arr)
+               
+               this.filteringByTags([...this.tagsValue], [...this.data])
 
           })
      }
 
 
+     /**
+      * Il supprime la balise du tableau et du DOM si la balise existe déjà.
+      * @param value - la valeur de la balise
+      */
      cantDoubleSameTags (value) {
           const box = document.querySelector('.filter-box')
 
           box.childNodes.forEach(el => {
                if(el.innerHTML.includes(value)) {
-                    this.arr.splice(this.arr.indexOf(value), 1)
+                    this.tagsValue.splice(this.tagsValue.indexOf(value), 1)
 
                     el.remove()
                }

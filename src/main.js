@@ -3,7 +3,6 @@ import { Data } from './app/modules/fetchData';
 import { SearchComponents } from './app/components/searchComponents';
 import { SearchController } from './app/controller/searchController';
 import { FiltersComponents } from './app/components/filtersComponents';
-import { FiltersController } from './app/controller/filtersController';
 
 class Main {
      constructor() {
