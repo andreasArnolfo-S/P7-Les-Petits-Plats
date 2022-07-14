@@ -5,6 +5,10 @@ export default class Plats {
           this.data = data;
      }
 
+     /**
+      * Il crée un nouvel élément HTML, définit sa classe et innerHTML, et renvoie l'élément.
+      * @returns Un élément de carte avec les données de l'objet.
+      */
      renderPlat() {
           const card = CreateElement('article', { 
                class: 'card',

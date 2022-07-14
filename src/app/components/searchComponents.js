@@ -8,6 +8,14 @@ export class SearchComponents {
           this.sectionPlat = document.querySelector('.section-plats');
      }
 
+     /**
+      * Il prend une valeur, efface la liste, parcourt les données et ajoute les données à la sectionPlat.
+      * 
+      * Si les données sont vides, il définit le message d'absence de résultats.
+      * 
+      * Si les données ne sont pas vides, cela efface le message d'absence de résultats.
+      * @param value - la valeur du champ de saisie
+      */
      setList(value) {
 
           this.clearList();
@@ -15,19 +23,22 @@ export class SearchComponents {
           for (let el of this.data) {
                this.sectionPlat.appendChild(new Plats(el).renderPlat());
           }
-
-          if (this.data.length === 0) {
-               this.setNoResults(value);
-          } else {
-               document.querySelector('.zeroResult').innerHTML = ''
-          }
+          this.data.length === 0 ? this.setNoResults(value) : document.querySelector('.zeroResult').innerHTML = '';
 
      }
 
+     /**
+      * Il efface le innerHTML de l'élément sectionPlat.
+      */
      clearList() {
           this.sectionPlat.innerHTML = ''
      }
 
+     /**
+      * Il prend une valeur comme argument et renvoie une chaîne HTML.
+      * @param value - la valeur de l'entrée de recherche
+      * @returns le code HTML du div avec la classe "zeroResult"
+      */
      setNoResults(value) {
 
           return document.querySelector('.zeroResult').innerHTML = ` 
