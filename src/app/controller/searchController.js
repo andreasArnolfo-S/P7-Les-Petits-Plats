@@ -22,8 +22,8 @@ export class SearchController {
           this.search.addEventListener('input', (e) => {
                const searchValue = e.target.value;
                if (searchValue.length > 2) {
-                    this.searchAlgo(searchValue);
-                    new SearchComponents(this.searchAlgo(searchValue)).setList();
+                    const result = this.searchAlgo(searchValue);
+                    new SearchComponents(result).setList();
                } else {
                     this.searchPlats()
                }
@@ -34,27 +34,14 @@ export class SearchController {
 
      }
 
-     /**
-      * Il prend une chaîne comme argument et renvoie un tableau d'objets contenant la chaîne dans leur nom,
-      * leurs ingrédients ou leur description.
-      * @param value - la valeur recherchée par l'utilisateur
-      * @returns Un tableau d'objets.
-      */
      searchAlgo(value) {
 
-          let tab = [];
-          let i = 0;
-
-          while (i < this.data.length) {
-               if (this.data[i].name.toLowerCase().includes(value.toLowerCase()) ||
-                    this.data[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(value.toLowerCase())) ||
-                    this.data[i].description.toLowerCase().includes(value.toLowerCase())) {
-                    tab.push(this.data[i]);
+          return this.data.filter(el => {
+               if (el.name.toLowerCase().includes(value.toLowerCase()) || el.ingredients.some(ing => ing.ingredient.toLowerCase().includes(value.toLowerCase())) || el.description.toLowerCase().includes(value.toLowerCase())) {
+                    return el
                }
-               i++;
-          }
+          })
 
-          return tab;
 
      }
 
