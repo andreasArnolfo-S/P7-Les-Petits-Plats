@@ -1,11 +1,13 @@
 @use "../abstracts" as c;
 
 .adv-search-wrapper {
-	// background-color: pink;
 	margin: 1% 0 0 0;
 	gap: 2%;
 	margin-left: 40px;
 	width: 90%;
+	@include c.max-1200px {
+		width: 50%;
+	}
 	.dropdown {
 		padding: 0;
 		position: relative;
@@ -14,6 +16,10 @@
 		justify-content: space-between;
 		padding-right: 10px;
 		transition: 0.3s;
+
+		@include c.max-600px {
+			margin-top: 15px;
+		}
 		&:hover {
 			label i {
 				animation: rotate 0.3s forwards;
@@ -58,6 +64,12 @@
 		border: none;
 		margin-top: -3px;
 		margin-right: 5px;
+		@include c.max-600px {
+			margin: auto;
+			width: auto;
+			columns: 1;
+			column-count: 1;
+		}
 		li {
 			color: #fff;
 			cursor: pointer;

@@ -21,13 +21,8 @@ export class SearchController {
 
           this.search.addEventListener('input', (e) => {
                const searchValue = e.target.value;
-               if (searchValue.length > 2) {
-                    this.searchAlgo(searchValue);
-                    new SearchComponents(this.searchAlgo(searchValue)).setList();
-               } else {
-                    this.searchPlats()
-               }
 
+               searchValue.length > 2 ? new SearchComponents(this.searchAlgo(searchValue)).setList() : this.searchPlats();
           })
 
           new SearchComponents(this.data).setList()

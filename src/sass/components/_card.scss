@@ -1,3 +1,5 @@
+@use '../abstracts' as c;
+
 .section-plats {
 	margin-top: 40px;
 	display: flex;
@@ -6,12 +8,19 @@
 	width: 100%;
 	justify-content: center;
 
+
 	.card {
 		width: 32%;
 		height: 450px;
 		overflow: hidden;
 		text-overflow: ellipsis !important;
 		animation: 0.6s fadeIn forwards;
+		@include c.max-768px{
+			width: 45%;
+		}
+		@include c.max-600px{
+			width: 85%;
+		}
 		@keyframes fadeIn {
 			0%{
 				opacity: 0;
