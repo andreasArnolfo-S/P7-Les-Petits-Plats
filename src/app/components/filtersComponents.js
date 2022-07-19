@@ -1,5 +1,6 @@
 import { FiltersController } from '../controller/filtersController';
 import { CreateElement } from './../utils/createElement';
+import { SearchComponents } from './searchComponents';
 
 export class FiltersComponents extends FiltersController {
 
@@ -57,7 +58,7 @@ export class FiltersComponents extends FiltersController {
      clickOnItem(categoryName, color) {
           const list = document.querySelector(`#list-${categoryName}`);
 
-          this.arr = []
+          this.tagsValue = []
 
           list.addEventListener('click', (e) => {
                const value = e.target.innerHTML;
@@ -68,19 +69,19 @@ export class FiltersComponents extends FiltersController {
                     innerHtml: value + ' ' + '<i class="fa-solid fa-times"></i>',
                })
 
-               this.arr.push(value)
+               this.tagsValue.push(value)
                btn.setAttribute('class', ` btn btn-${color} fing`)
                btn.addEventListener('click', () => {
                     btn.style.animation = 'fadeOut .6s forwards'
                     setTimeout(() => {
                          btn.remove()
                     }, 800)
-                    this.arr.splice(this.arr.indexOf(value), 1)
-                    this.filteringByTags(this.arr)
+                    this.tagsValue.splice(this.tagsValue.indexOf(value), 1)
+                    this.tagsValue.length === 0 ? new SearchComponents(this.data).setList(value) : this.filteringByTags([...this.tagsValue], [...this.data]);
 
                })
                document.querySelector('.filter-box').appendChild(btn)
-               this.filteringByTags([...this.arr], [...this.data])
+               this.filteringByTags([...this.tagsValue], [...this.data])
 
           })
      }
