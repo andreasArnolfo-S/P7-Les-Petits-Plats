@@ -7,39 +7,25 @@ export class FiltersController {
           this.data = data
      }
 
-     test(value) {
-          this.toMove = []
-          this.result = [] 
-          if (value.length > 0) {
-               value.forEach(el => {
-                    this.data.forEach(plat => {
-                         if (plat.name.toLowerCase().includes(el) ||
-                              plat.ingredients.some(ing => ing.ingredient.toLowerCase().includes(el)) ||
-                              plat.description.toLowerCase().includes(el)) {
-                              console.log(plat)
-                         } else {
-                              this.toMove.push(plat)
-                         }
-                    })
-               })
-               this.data.forEach(plat => {
-                    if (this.toMove.indexOf(plat) == -1) {
-                         this.result.push(plat)
-                    }
-               })
-          } else {
-               this.result = [...this.data]
+     filteringByTags(tagsValues, array) {
+
+          if (tagsValues.length === 0) {
+               return array
           }
+          const result = []
+          array.forEach(el => {
+               if (el.ingredients.some(ing => tagsValues.includes(ing.ingredient.toLowerCase())) || el.appliance.toLowerCase().includes(tagsValues) || el.ustensils.some(ust => tagsValues.includes(ust.toLowerCase()))) {
+                    result.push(el)
+               }
+          })
 
-          if (this.result.length > 0) {
-               new Toast(this.result.length).show()
+          tagsValues.splice(0, 1)
+          
+          new Toast(result.length).showCountOfResult()
+          
+          new SearchComponents(result).setList(tagsValues)
 
-          } else {
-               new Toast(this.result.length).showZero()
-          }
-
-
-          return new SearchComponents(this.result).setList(value)
+          return this.filteringByTags(tagsValues, result)
 
      }
 

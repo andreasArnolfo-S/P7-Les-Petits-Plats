@@ -76,11 +76,11 @@ export class FiltersComponents extends FiltersController {
                          btn.remove()
                     }, 800)
                     this.arr.splice(this.arr.indexOf(value), 1)
-                    this.test(this.arr)
+                    this.filteringByTags(this.arr)
 
                })
                document.querySelector('.filter-box').appendChild(btn)
-               this.test(this.arr)
+               this.filteringByTags([...this.arr], [...this.data])
 
           })
      }
