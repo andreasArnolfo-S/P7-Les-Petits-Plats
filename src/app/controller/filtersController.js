@@ -13,6 +13,7 @@ export class FiltersController {
                return array
           }
           const result = []
+          
           array.forEach(el => {
                if (el.ingredients.some(ing => tagsValues.includes(ing.ingredient.toLowerCase())) || el.appliance.toLowerCase().includes(tagsValues) || el.ustensils.some(ust => tagsValues.includes(ust.toLowerCase()))) {
                     result.push(el)
