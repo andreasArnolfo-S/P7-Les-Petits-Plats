@@ -6,7 +6,20 @@ export class FiltersController {
      constructor(data) {
 
           this.data = data
-
+          this.categories = [
+               {
+                    name: 'ingredients',
+                    color: 'primary'
+               },
+               {
+                    name: 'appliance',
+                    color: 'success'
+               },
+               {
+                    name: 'ustensils',
+                    color: 'danger'
+               }
+          ];
      }
 
      /**
@@ -41,10 +54,15 @@ export class FiltersController {
           }
 
           tagsValues.splice(0, 1)
-          
+
           new Toast(result.length).showCountOfResult()
-          
+
           new SearchComponents(result).setList(tagsValues)
+
+          for (let e of this.categories) {
+               this.displayItems(e.name, result)
+
+          }
 
           return this.filteringByTags(tagsValues, result)
 
@@ -57,28 +75,48 @@ export class FiltersController {
       * @param categoryName - le nom de la catégorie que vous souhaitez afficher
       * @returns Un tableau de chaînes.
       */
-     displayItems(categoryName) {
+     displayItems(categoryName, data) {
+
           if (categoryName === 'ingredients') {
                this.ingredients = []
-               this.data.forEach(el => {
-                    el.ingredients.map(ing => this.ingredients.push(ing.ingredient.toLowerCase()));
+               const setIngredients = new Set()
+               data.forEach(el => {
+                    el.ingredients.forEach(ing => {
+                         setIngredients.add(ing.ingredient.toLowerCase())
+                    })
+
                })
-               const filteredArray = this.ingredients.filter((ele, pos) => this.ingredients.indexOf(ele) == pos);
-               return filteredArray.slice(0, 50).map(el => `<li value='${el}' class="dropdown-item ingItem" href="#">${el}</li>`).join('')
-          } else if (categoryName === 'appliance') {
+               this.ingredients = Array.from(setIngredients)
+               const listIngredients = document.querySelector('#list-ingredients')
+               return listIngredients.innerHTML = this.ingredients.map(el => `<li value='${el}' class="dropdown-item ingItem" href="#">${el}</li>`).join('')
+          }
+          else if (categoryName === 'appliance') {
                this.appareils = []
-               this.data.forEach(el => {
-                    this.appareils.push(el.appliance.toLowerCase())
+               const setAppliance = new Set()
+               data.forEach(el => {
+
+                    setAppliance.add(el.appliance.toLowerCase())
+
                })
-               const filteredArray = this.appareils.filter((ele, pos) => this.appareils.indexOf(ele) == pos);
-               return filteredArray.map(el => `<li value='${el}' class="dropdown-item appItem" href="#">${el}</li>`).join('')
-          } else if (categoryName === 'ustensils') {
+               this.appareils = Array.from(setAppliance)
+               const listAppareils = document.querySelector('#list-appliance')
+               return listAppareils.innerHTML = this.appareils.map(el => `<li value='${el}' class="dropdown-item appItem" href="#">${el}</li>`).join('')
+          }
+          else if (categoryName === 'ustensils') {
                this.ustensiles = []
-               this.data.forEach(el => {
-                    el.ustensils.map(ing => this.ustensiles.push(ing.toLowerCase()));
+               const setUstensils = new Set()
+               data.forEach(el => {
+
+                    el.ustensils.forEach(ust => {
+
+                         setUstensils.add(ust.toLowerCase())
+
+                    })
+
                })
-               const filteredArray = this.ustensiles.filter((ele, pos) => this.ustensiles.indexOf(ele) == pos);
-               return filteredArray.map(el => `<li value='${el}' class="dropdown-item ustItem" href="#">${el}</li>`).join('')
+               this.ustensiles = Array.from(setUstensils)
+               const listUstensils = document.querySelector('#list-ustensils')
+               return listUstensils.innerHTML = this.ustensiles.map(el => `<li value='${el}' class="dropdown-item ustItem" href="#">${el}</li>`).join('')
           }
      }
 

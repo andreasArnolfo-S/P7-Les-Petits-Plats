@@ -1,16 +1,16 @@
 @use "../abstracts" as c;
 
 .adv-search-wrapper {
+	position: relative !important;
 	margin: 1% 0 0 0;
 	gap: 2%;
 	margin-left: 40px;
-	width: 90%;
+	width: 100%;
 	@include c.max-1200px {
 		width: 50%;
 	}
 	.dropdown {
 		padding: 0;
-		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -62,8 +62,8 @@
 		column-count: 3;
 		width: 728px;
 		border: none;
-		margin-top: -3px;
 		margin-right: 5px;
+		
 		@include c.max-600px {
 			margin: auto;
 			width: auto;
@@ -131,4 +131,9 @@
 	to {
 		transform: rotate(180deg);
 	}
+}
+
+.dropdown-menu {
+	transform: none !important;
+	top: 99% !important;
 }

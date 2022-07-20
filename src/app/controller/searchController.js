@@ -1,5 +1,7 @@
 import { SearchComponents } from './../components/searchComponents';
-
+import { FiltersController } from './filtersController';
+import { FiltersComponents } from './../components/filtersComponents';
+import { tagsValue } from './../utils/global';
 export class SearchController {
 
      constructor(data) {
@@ -8,8 +10,6 @@ export class SearchController {
           this.data = data
 
      }
-
-
 
      /**
       * Lorsque l'utilisateur tape dans la barre de recherche, si la saisie est supérieure à 2 caractères,
@@ -22,7 +22,18 @@ export class SearchController {
           this.search.addEventListener('input', (e) => {
                const searchValue = e.target.value;
 
-               searchValue.length > 2 ? new SearchComponents(this.searchAlgo(searchValue)).setList() : this.searchPlats();
+               if (searchValue.length > 2) {
+                    const result = this.searchAlgo(searchValue);
+
+                    new SearchComponents(result).setList()
+                    const filterComponents = new FiltersComponents()
+
+                    filterComponents.displayItems('ingredients', result)
+                    filterComponents.displayItems('appliance', result)
+                    filterComponents.displayItems('ustensils', result)
+               } else {
+                    this.searchPlats()
+               }
           })
 
           new SearchComponents(this.data).setList()
@@ -49,7 +60,7 @@ export class SearchController {
                i++;
           }
 
-          return tab;
+          return new FiltersController([...tab]).filteringByTags([...tagsValue], [...tab])
 
      }
 
