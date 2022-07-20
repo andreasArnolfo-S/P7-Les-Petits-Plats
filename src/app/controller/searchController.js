@@ -1,7 +1,8 @@
 import { SearchComponents } from './../components/searchComponents';
 import { FiltersController } from './filtersController';
 import { FiltersComponents } from './../components/filtersComponents';
-import { tagsValue } from './../utils/global';
+import { tagsValue, resultRecipes } from './../utils/global';
+
 export class SearchController {
 
      constructor(data) {
@@ -9,6 +10,14 @@ export class SearchController {
           this.search = document.querySelector('.input-box');
           this.data = data
 
+     }
+     some(array, value){
+          for(let i = 0; i < array.length-1; i++){
+               if(array[i] === value){
+                    return true;
+               }
+          }
+          return false;
      }
 
      /**
@@ -27,6 +36,8 @@ export class SearchController {
 
                     new SearchComponents(result).setList()
                     const filterComponents = new FiltersComponents()
+
+
 
                     filterComponents.displayItems('ingredients', result)
                     filterComponents.displayItems('appliance', result)
@@ -50,13 +61,17 @@ export class SearchController {
 
           let tab = [];
           let i = 0;
-
+          resultRecipes.splice(0, resultRecipes.length);
           while (i < this.data.length) {
+
                if (this.data[i].name.toLowerCase().includes(value.toLowerCase()) ||
-                    this.data[i].ingredients.some(ing => ing.ingredient.toLowerCase().includes(value.toLowerCase())) ||
-                    this.data[i].description.toLowerCase().includes(value.toLowerCase())) {
+                         this.some(this.data[i].ingredients, value.toLowerCase()) ||               
+                         this.data[i].description.toLowerCase().includes(value.toLowerCase())) {
                     tab.push(this.data[i]);
+                    resultRecipes.push(this.data[i]);
                }
+
+               
                i++;
           }
 

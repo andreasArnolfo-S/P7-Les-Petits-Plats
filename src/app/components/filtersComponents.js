@@ -1,7 +1,7 @@
 import { FiltersController } from '../controller/filtersController';
 import { CreateElement } from './../utils/createElement';
 import { SearchComponents } from './searchComponents';
-import { tagsValue } from './../utils/global';
+import { tagsValue, resultRecipes } from './../utils/global';
 export class FiltersComponents extends FiltersController {
 
      constructor(data) {
@@ -61,8 +61,11 @@ export class FiltersComponents extends FiltersController {
                     tagsValue.length === 0 ? new SearchComponents(this.data).setList(value) : this.filteringByTags([...tagsValue], [...this.data]);
                })
                document.querySelector('.filter-box').appendChild(btn)
-               
-               this.filteringByTags([...tagsValue], [...this.data])
+               if (resultRecipes.length > 0) {
+                    this.filteringByTags([...tagsValue], [...resultRecipes]);
+               } else {
+                    this.filteringByTags([...tagsValue], [...this.data])
+               }
 
           })
      }
