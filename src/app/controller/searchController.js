@@ -11,6 +11,12 @@ export class SearchController {
           this.data = data
 
      }
+     /**
+      * Il parcourt un tableau et renvoie true si la valeur est trouvée dans le tableau.
+      * @param array - Le tableau à parcourir
+      * @param value - La valeur à rechercher.
+      * @returns vrai
+      */
      some(array, value){
           for(let i = 0; i < array.length-1; i++){
                if(array[i] === value){
@@ -36,8 +42,6 @@ export class SearchController {
 
                     new SearchComponents(result).setList()
                     const filterComponents = new FiltersComponents()
-
-
 
                     filterComponents.displayItems('ingredients', result)
                     filterComponents.displayItems('appliance', result)
