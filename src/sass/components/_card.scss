@@ -19,8 +19,9 @@
 			width: 45%;
 		}
 		@include c.max-600px{
-			width: 85%;
+			width: 90%;
 		}
+
 		@keyframes fadeIn {
 			0%{
 				opacity: 0;

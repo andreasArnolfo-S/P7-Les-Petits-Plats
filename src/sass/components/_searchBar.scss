@@ -1,3 +1,5 @@
+@use "../abstracts" as c;
+
 .input-box {
 	position: relative;
 	width: 90%;
@@ -17,6 +19,12 @@
 			100% {
 				transform: scale(1)
 			}
+		}
+		@include  c.max-375px {
+			width: 100%;
+		}
+		@include  c.max-992px {
+			width: 100%;
 		}
 	}
 	i {
